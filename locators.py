@@ -3,16 +3,16 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
     COOKIE_BUTTON = [By.XPATH, ".//button[text()='да все привыкли']"]
-    YANDEX_LOGO = [By. CLASS_NAME, 'Header_LogoYandex__3TSOI' ]
-    SAMOKAT_LOGO = [By. CLASS_NAME, 'Header_LogoScooter__3lsAR']
+    YANDEX_LOGO = [By.CLASS_NAME, 'Header_LogoYandex__3TSOI' ]
+    SAMOKAT_LOGO = [By.CLASS_NAME, 'Header_LogoScooter__3lsAR']
     
 
 class HomePageLocators:
-    ORDER_BUTTON_HEADERS = [By. CLASS_NAME, 'Button_Button__ra12g']
-    ORDER_STATUS_BUTTON = [By. CLASS_NAME, 'Header_Link__1TAG7']
-    QUESTION_TEMPLATE = [By. CLASS_NAME, 'Home_SubHeader__zwi_E']
+    ORDER_BUTTON_HEADERS = [By.CLASS_NAME, 'Button_Button__ra12g']
+    ORDER_STATUS_BUTTON = [By.CLASS_NAME, 'Header_Link__1TAG7']
+    QUESTION_TEMPLATE = [By.CLASS_NAME, 'Home_SubHeader__zwi_E']
     ANSWER_TEMPLATE = [By.CLASS_NAME, 'Home_FAQ__3uVm4']
-    ORDER_BUTTON_MIDDLE = [By. CLASS_NAME, 'Button_Button__ra12g Button_Middle__1CSJM']
+    ORDER_BUTTON_MIDDLE = [By.CLASS_NAME, 'Button_Button__ra12g Button_Middle__1CSJM']
 
     @staticmethod
     def FAQ_question_button(question_number): # возвращает локатор кнопки с вопросом FAQ
@@ -29,7 +29,9 @@ class OrderPageLocators:
     ADDRESS_INPUT = [By.XPATH, ".//input[contains(@placeholder,'Адрес')]"]
     SUBWAY_FIELD = [By.XPATH, ".//input[contains(@placeholder,'метро')]"] 
 
-    
+    @staticmethod
+    def SUBWAY_HINT_BUTTON(subway_name: str):
+        return [By.XPATH, f".//div[text()='{subway_name}']/parent::button"]
 
     TELEPHONE_NUMBER_FIELD = [By.XPATH, ".//input[contains(@placeholder,'Телефон')]"]
 
@@ -41,10 +43,8 @@ class OrderPageLocators:
     COMMENT_INPUT = [By.XPATH, ".//input[contains(@placeholder,'Комментарий для курьера')]"]
     ORDER_BUTTON = [By.XPATH, ".//button[text()='Назад']/parent::div/button[text()='Заказать']"]
     YES_BUTTON = [By.XPATH, ".//button[text()='Да']"]
+    STATUS_WINDOW = (By.XPATH, '//div[contains(@class,"Order_ModalHeader")]')
     ORDER_COMPLETED_INFO = [By.XPATH, ".//div[contains(text(),'Номер заказа')]"]
     SHOW_STATUS_BUTTON = [By.XPATH, ".//button[text()='Посмотреть статус']"]
 
-
-class YaScooterTrackPageLocator:
-    MAIN_ORDER_NUMBER_FIELD = [By.XPATH, ".//input[@placeholder='']"]
 

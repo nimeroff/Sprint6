@@ -1,10 +1,10 @@
 import pytest
 import allure
-from utils.urlss import CUrls
+from utils.urls import Urls
 from pages.home_page import HomePage
 from pages.order_page import OrderPage
 from locators import HomePageLocators
-from utils.datas import OrderPageData as order_data
+from utils.data import OrderPageData as order_data
 
 
 @allure.parent_suite('Parent_suite_Создание заказа')
@@ -20,7 +20,7 @@ class TestYaScooterOrderPage:
         home_page.click_cookie_accept()
         home_page.click_top_order_button()
         order_page = OrderPage(driver)
-        order_page.go_to_site(CUrls.order_page)
+        order_page.go_to_site(Urls.order_page)
         order_page.fill_user_data(order_data.data_sets[data_set])
         order_page.go_next()
         order_page.fill_rent_data(order_data.data_sets[data_set])
@@ -39,7 +39,7 @@ class TestYaScooterOrderPage:
         home_page.click_cookie_accept()
         home_page.click_bottom_order_button()
         order_page = OrderPage(driver)
-        order_page.go_to_site(CUrls.order_page)
+        order_page.go_to_site(Urls.order_page)
         order_page.fill_user_data(order_data.data_sets[data_set])
         order_page.go_next()
         order_page.fill_rent_data(order_data.data_sets[data_set])

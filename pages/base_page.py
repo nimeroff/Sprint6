@@ -12,12 +12,10 @@ class BasePage:
         return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
                                                       message=f"Can't find element by locator {locator}")
 
-
-
     @allure.step('Перейти по адресу')
     def go_to_site(self, url=None):
         if url is None:
-            url = Urls.MAIN_PAGE
+            url = Urls.main_page
         self.driver.get(url)
 
     @allure.step('Получить текущий URL')

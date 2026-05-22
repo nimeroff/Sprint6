@@ -6,11 +6,11 @@ import allure
 
 
 class OrderPage(BasePage):
-    @allure.step('Ввод фамилии')
+    @allure.step('Ввод имени')
     def input_last_name(self, first_name: str):
         return self.find_element(Locators.FIRST_NAME_INPUT).send_keys(first_name)
 
-    @allure.step('Ввод имени')
+    @allure.step('Ввод фамилии')
     def input_first_name(self, last_name: str):
         return self.find_element(Locators.LAST_NAME_INPUT).send_keys(last_name)
 
@@ -46,7 +46,7 @@ class OrderPage(BasePage):
 
     @allure.step('Комментарий для курьера')
     def input_comment(self, comment_text):
-        return self.find_element(Locators.COMMENT_FOR_COURIER_FIELD).send_keys(comment_text)
+        return self.find_element(Locators.COMMENT_INPUT).send_keys(comment_text)
 
     @allure.step('Нажать "Заказать"')
     def click_order(self):
@@ -54,16 +54,8 @@ class OrderPage(BasePage):
 
     @allure.step('Подтвердить заказ')
     def click_accept_order(self):
-        return self.find_element(Locators.ACCEPT_ORDER_BUTTON).click()
+        return self.find_element(Locators.YES_BUTTON).click()
 
-    @allure.step('Вычитать номер заказа')
-    def get_order_number(self):
-        about_order_text = self.find_element(Locators.ORDER_COMPLETED_INFO).text
-        return ''.join(re.findall('[0-9]', about_order_text))
-
-    @allure.step('Перейти к статусу заказа')
-    def click_go_to_status(self):
-        return self.find_element(Locators.SHOW_STATUS_BUTTON).click()
 
     @allure.step('Заполнить данные на этапе "Для кого самокат"')
     def fill_user_data(self, data_set: dict):
@@ -80,3 +72,7 @@ class OrderPage(BasePage):
         for option in data_set['color']:
             self.choose_color(option)
         self.input_comment(data_set['comment_for_courier'])
+
+    @allure.step('Проверяем наличие окна с информацией о заказе')
+    def check_order_status_window(self):
+        return self.wait_for_element_visible(Locators.STATUS_WINDOW)

@@ -9,15 +9,15 @@ from selenium.webdriver.support import expected_conditions as EC
 class HomePage(BasePage):
     @allure.step('Нажать на кнопку заказа вверху страницы')
     def click_top_order_button(self):
-        return self.find_element(Locators.TOP_ORDER_BUTTON).click()
+        return self.find_element(Locators.ORDER_BUTTON_HEADERS).click()
 
     @allure.step('Нажать на кнопку заказа внизу страницы')
     def click_bottom_order_button(self):
-        return self.find_element(Locators.BOTTOM_ORDER_BUTTON).click()
+        return self.find_element(Locators.ORDER_BUTTON_MIDDLE).click()
 
     @allure.step('Нажать на вопрос в FAQ')
     def click_faq_question(self, question_number: int):
-        elems = self.find_elements(Locators.FAQ_BUTTONS, 10)
+        elems = self.find_element(Locators.FAQ_BUTTONS, 10)
         return elems[question_number].click()
     
     @allure.step('Переключиться на вкладку браузера')
@@ -33,14 +33,27 @@ class HomePage(BasePage):
 
     @allure.step('Клик по логотипу Самоката')
     def click_scooter_logo(self):
-        self.click_to_element(BasePageLocators.Samokat_logo)
+        #self.click_to_element(BasePageLocators.SAMOKAT_LOGO)
+        self.find_element(BasePageLocators.SAMOKAT_LOGO).click()
         return self.current_url
 
     @allure.step('Переход по логотипу Яндекса')
     def go_to_yandex_from_logo(self):
-        self.click_to_element(BasePageLocators.Yandex_logo)
+        #self.click_to_element(BasePageLocators.YANDEX_LOGO)
+        self.find_element(BasePageLocators.YANDEX_LOGO).click()
         self.switch_to_tab(1)
 
     @allure.step('Принять куки')
     def click_cookie_accept(self):
-        return self.find_element(BasePageLocators.Cookie_button).click()
+        return self.find_element(BasePageLocators.COOKIE_BUTTON).click()
+    
+    @allure.step('Скролл до элемента с локатором {locator}')
+    def scroll_to_element(self, locator):
+        element = self.wait_for_element_visible(locator)
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView(true);", element)
+        
+    def find_element(self, locator, time=10):
+        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
+                                                      message=f"Can't find element by locator {locator}")
+    
