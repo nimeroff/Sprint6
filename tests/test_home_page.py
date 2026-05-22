@@ -17,7 +17,7 @@ class TestHomePage:
         home_page.click_yandex_button()
         home_page.switch_window(1)
         home_page.wait_url_until_not_about_blank()
-        current_url = home_page.get_current_url()
+        current_url = home_page.current_url()
         assert Urls.dzen_page in current_url
 
     @allure.title('Проверка перехода по логотипу Самоката')
@@ -29,5 +29,5 @@ class TestHomePage:
         home_page.click_cookie_accept()
         home_page.click_scooter_logo()
         home_page.wait_url_until_not_about_blank()
-        current_url = home_page.get_current_url()
+        current_url = home_page.current_url()
         assert Urls.main_page in current_url

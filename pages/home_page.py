@@ -29,7 +29,7 @@ class HomePage(BasePage):
     
     @allure.step('Перейти на страницу яндекса')
     def click_yandex_button(self):
-        return self.find_element(BasePageLocators.YANDEX_SITE_BUTTON).click()
+        return self.find_element(BasePageLocators.YANDEX_LOGO).click()
 
     @allure.step('Клик по логотипу Самоката')
     def click_scooter_logo(self):
