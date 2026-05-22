@@ -17,8 +17,10 @@ class HomePage(BasePage):
 
     @allure.step('Нажать на вопрос в FAQ')
     def click_faq_question(self, question_number: int):
-        elems = self.find_element(Locators.FAQ_BUTTONS, 10)
-        return elems[question_number].click()
+        #elems = self.find_element(Locators.FAQ_BUTTONS, 10)
+        #elems = self.find_element(Locators.QUESTION_TEMPLATE, 10)
+        return self.find_element(Locators.QUESTION_TEMPLATE, 10).click()
+        #return elems[question_number].click()
     
     @allure.step('Переключиться на вкладку браузера')
     def switch_window(self, window_number: int = 1):
@@ -56,4 +58,6 @@ class HomePage(BasePage):
     def find_element(self, locator, time=10):
         return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
                                                       message=f"Can't find element by locator {locator}")
+        #return WebDriverWait(self.driver, time).until(EC.presence_of_all_elements_located(locator),
+        #                                              message=f"Can't find element by locator {locator}")
     
