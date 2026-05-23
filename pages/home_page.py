@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class HomePage(BasePage):
+
     @allure.step('Нажать на кнопку заказа вверху страницы')
     def click_top_order_button(self):
         return self.find_element(Locators.ORDER_BUTTON_HEADERS).click()
@@ -55,9 +56,9 @@ class HomePage(BasePage):
         self.driver.execute_script(
             "arguments[0].scrollIntoView(true);", element)
         
-    def find_element(self, locator, time=10):
-        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
-                                                      message=f"Can't find element by locator {locator}")
+    #def find_element(self, locator, time=10):
+    #    return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
+     #                                                 message=f"Can't find element by locator {locator}")
         #return WebDriverWait(self.driver, time).until(EC.presence_of_all_elements_located(locator),
         #                                              message=f"Can't find element by locator {locator}")
     

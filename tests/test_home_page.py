@@ -3,7 +3,6 @@ from utils.urls import Urls
 from pages.home_page import HomePage
 
 
-
 @allure.suite('Тестирование переходов с логотипа')
 class TestHomePage:
 

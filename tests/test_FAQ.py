@@ -5,8 +5,8 @@ from utils.data import HomePageFAQ
 from locators import HomePageLocators
 
 
-#@allure.epic('Эпик_Upgrade Main page / ui usability')
-#@allure.parent_suite('Parent_suite_Домашняя страница')
+@allure.epic('Эпик_Upgrade Main page / ui usability')
+@allure.parent_suite('Parent_suite_Домашняя страница')
 @allure.suite('Suite_FAQ')
 class TestFAQPage:
     @allure.feature('Фича_Аккордион с вопрос/ответ на Домашней страницы')
@@ -30,10 +30,10 @@ class TestFAQPage:
     def test_faq_click_first_question_show_answer(self, driver, question, answer, expected_answer):
         home_page = HomePage(driver)
         home_page.go_to_site()
-        #home_page.scroll_to_element(HomePageLocators.QUESTION_TEMPLATE)
+        home_page.scroll_to_element(HomePageLocators.QUESTION_TEMPLATE)
         home_page.click_cookie_accept()
         home_page.find_element(HomePageLocators.QUESTION_TEMPLATE)
         home_page.click_faq_question(question_number=question)
         answer = home_page.find_element(HomePageLocators.FAQ_answer(answer_number=answer))
 
-        assert answer.is_displayed() and answer.text == expected_answer, 'Ответ на вопрос не совпадает с ожидаемым значением '
+        assert answer.is_displayed() and answer.text == expected_answer, 'Ответ на воп совпадает с ожидаемым значением '
