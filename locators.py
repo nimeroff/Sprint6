@@ -11,7 +11,7 @@ class HomePageLocators:
     ORDER_STATUS_BUTTON = [By.CLASS_NAME, 'Header_Link__1TAG7']
     QUESTION_TEMPLATE = [By.CLASS_NAME, 'Home_SubHeader__zwi_E']
     ANSWER_TEMPLATE = [By.CLASS_NAME, 'Home_FAQ__3uVm4']
-    ORDER_BUTTON_MIDDLE = [By.CLASS_NAME, 'Button_Button__ra12g Button_Middle__1CSJM']
+    ORDER_BUTTON_MIDDLE = [By.XPATH, ".//button[contains(@class,'Button_Button__ra12g') and contains(text(),'Заказать')]"]
 
     @staticmethod
     def FAQ_question_button(question_number): # возвращает локатор кнопки с вопросом FAQ
@@ -19,7 +19,7 @@ class HomePageLocators:
 
     @staticmethod
     def FAQ_answer(answer_number): # возвращает локатор дива с ответом FAQ
-        return [By.XPATH, f".//div[@class='accordion__panel' and @id='accordion__panel-{answer_number}']/p"]
+        return [By.XPATH, f".//div[@class='accordion__panel' and @id='accordion__panel-{answer_number}']"]
 
 
 class OrderPageLocators:
@@ -36,12 +36,13 @@ class OrderPageLocators:
 
     NEXT_BUTTON = [By.XPATH, ".//button[text()='Далее']"]
     DATE_FIELD = [By.XPATH, ".//input[contains(@placeholder,'Когда')]"]
-    RENTAL_PERIOD_FIELD = [By.XPATH, ".//span[@class='Dropdown-arrow']"]
-    RENTAL_PERIOD_LIST = [By.XPATH, ".//div[@class='Dropdown-option']"]
-    COLOR_CHECKBOXES = [By.XPATH, ".//div[contains(text(),'Цвет')]/parent::div//input"]
+    RENTAL_PERIOD_FIELD = [By.XPATH, ".//div[@class='Dropdown-control']"]
+    #RENTAL_PERIOD_LIST = [By.XPATH, ".//div[@text()='{}']"]
+    #COLOR_CHECKBOXES = [By.XPATH, ".//div[contains(text(),'Цвет')]/parent::div//input"]
     COMMENT_INPUT = [By.XPATH, ".//input[contains(@placeholder,'Комментарий для курьера')]"]
-    ORDER_BUTTON = [By.XPATH, ".//button[text()='Назад']/parent::div/button[text()='Заказать']"]
-    YES_BUTTON = [By.XPATH, ".//button[text()='Да']"]
+    #ORDER_BUTTON = [By.XPATH, ".//button[text()='Назад']/parent::div/button[text()='Заказать']"]
+    ORDER_BUTTON = [By.XPATH, ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']"]
+    YES_BUTTON = [By.XPATH, ".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']"]
     STATUS_WINDOW = (By.XPATH, '//div[contains(@class,"Order_ModalHeader")]')
     ORDER_COMPLETED_INFO = [By.XPATH, ".//div[contains(text(),'Номер заказа')]"]
     SHOW_STATUS_BUTTON = [By.XPATH, ".//button[text()='Посмотреть статус']"]

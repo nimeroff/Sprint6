@@ -1,5 +1,6 @@
 import re
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
 from locators import OrderPageLocators as Locators
 import allure
@@ -33,16 +34,21 @@ class OrderPage(BasePage):
 
     @allure.step('Ввод даты')
     def input_date(self, date: str):
-        return self.find_element(Locators.DATE_FIELD).send_keys(date)
+        date_input = self.find_element(locator=Locators.DATE_FIELD)
+        date_input.click()
+        date_input.clear()
+        date_input.send_keys(date)
+        date_input.send_keys(Keys.ENTER)
+
 
     @allure.step('Выбор периода аренды')
     def choose_rental_period(self, option: int):
-        self.find_element(Locators.RENTAL_PERIOD_FIELD).click()
-        return self.find_elements(Locators.RENTAL_PERIOD_LIST)[option].click()
+        choose_click= self.find_element(Locators.RENTAL_PERIOD_FIELD).click()
+        return self.find_element([By.XPATH, f".//div[@class='Dropdown-option' and text()='{option}']"]).click()
 
     @allure.step('Выбор цвета')
-    def choose_color(self, option: int):
-        return self.find_elements(Locators.COLOR_CHECKBOXES)[option].click()
+    def choose_color(self, option: str):
+        return self.find_elements([By.XPATH, f".//label[@for='{option}']"]).click()
 
     @allure.step('Комментарий для курьера')
     def input_comment(self, comment_text):
@@ -50,7 +56,9 @@ class OrderPage(BasePage):
 
     @allure.step('Нажать "Заказать"')
     def click_order(self):
-        return self.find_element(Locators.ORDER_BUTTON).click()
+        order_button =  self.find_element(Locators.ORDER_BUTTON)
+        #self.scroll_to_element(Locators.ORDER_BUTTON)
+        return order_button.click()
 
     @allure.step('Подтвердить заказ')
     def click_accept_order(self):
@@ -75,4 +83,14 @@ class OrderPage(BasePage):
 
     @allure.step('Проверяем наличие окна с информацией о заказе')
     def check_order_status_window(self):
-        return self.wait_for_element_visible(Locators.STATUS_WINDOW)
+        try:
+            self.wait_for_element_visible(Locators.STATUS_WINDOW)
+            return True
+        except:
+            return False
+
+    @allure.step('Скролл до элемента с локатором {locator}')
+    def scroll_to_element(self, locator):
+        element = self.wait_for_element_visible(locator)
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView(true);", element)

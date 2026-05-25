@@ -17,7 +17,8 @@ class TestYaScooterOrderPage:
     @pytest.mark.parametrize('data_set', ['data_set1', 'data_set2'])
     def test_order_page_create_order_and_go_order_status(self, driver, data_set):
         home_page = HomePage(driver)
-        home_page.click_cookie_accept()
+        home_page.go_to_site()
+        home_page.click_accept_order()
         home_page.click_top_order_button()
         order_page = OrderPage(driver)
         order_page.go_to_site(Urls.order_page)
@@ -26,7 +27,7 @@ class TestYaScooterOrderPage:
         order_page.fill_rent_data(order_data.data_sets[data_set])
         order_page.click_order()
         order_page.click_accept_order()
-        assert order_page.check_order_status_window() ("Окно с информацией о заказе не появилось")
+        assert order_page.check_order_status_window(), "Окно с информацией о заказе появилось"
 
 
     @allure.suite('Suite_Полный путь создания заказа')
@@ -36,7 +37,8 @@ class TestYaScooterOrderPage:
     @pytest.mark.parametrize('data_set', ['data_set1', 'data_set2'])
     def test_order_page_create_order_and_go_order_status(self, driver, data_set):
         home_page = HomePage(driver)
-        home_page.click_cookie_accept()
+        home_page.go_to_site()
+        home_page.click_accept_order()
         home_page.click_bottom_order_button()
         order_page = OrderPage(driver)
         order_page.go_to_site(Urls.order_page)
@@ -45,4 +47,4 @@ class TestYaScooterOrderPage:
         order_page.fill_rent_data(order_data.data_sets[data_set])
         order_page.click_order()
         order_page.click_accept_order()
-        assert order_page.check_order_status_window() ("Окно с информацией о заказе не появилось")
+        assert order_page.check_order_status_window(), "Окно с информацией о заказе появилось"
